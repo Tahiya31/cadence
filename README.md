@@ -10,6 +10,12 @@ Timeseries partitioning is an essential step in most machine-learning driven, se
 
 ## Use
 
-* Please follow the Documentation notebook in dae_cpd folder to make use of the library.
+* Please follow the Documentation notebook in `cadence` folder to make use of the library (used in the producing the results reported in the paper).
 
 * For detailed analysis specific to the paper, follow DAE-CPD Notebook.
+
+* `data` folder in `cadence` contains 4 datasets used in the paper:
+    * beedance
+    * yahoo
+    * hasc
+    * fishkiller.
