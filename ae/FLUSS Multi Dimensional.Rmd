@@ -1,0 +1,43 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+library(tsmp)
+occupancy = read.table('./Framework/occupancy_data/datatraining.csv', row.names=1, sep=',')
+View(occupancy[0:500])
+problems(occupancy)
+
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+```{r}
+library(dplyr)
+f_data <- data.matrix(occupancy[c('Humidity', 'CO2')], rownames.force = NA)
+View(f_data)
+
+w <- 20
+mp <- tsmp(f_data, window_size = w, verbose = 1)
+mp <- fluss(mp, 1)
+print(mp)
+plot(c(1:8143), (f_data[0]), type='l')
+abline(v=5000, col="red", lwd=3)
+for (c in mp$fluss) {
+  abline(v=c, col="blue", lwd=3)
+}
+
+```
+
+
+```{r}
+length(f_data)
+```
